@@ -36,10 +36,10 @@ class Net(nn.Module):
         self.optimizer = optim.SGD(self.parameters(), lr=0.02, momentum=0.9)
 
     def forward(self, x):
-        for i in range(len(self.array_of_fc)):
-            x = self.array_of_fc[i](x)
-            x = self.array_of_activation_functions[i](x)
-        return x
+        for i in range(len(self.array_of_fc)) - 1:
+                x = self.array_of_fc[i](x)
+                x = self.array_of_activation_functions[i](x)
+        return self.array_of_fc[-1](x)
 
     def set_weights_and_biases(self, flattend_list_of_weights_and_biases):
         modules = self.array_of_fc.modules()
